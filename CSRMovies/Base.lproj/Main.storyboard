@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="ViewController" customModule="CSRMovies" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -15,11 +15,80 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="a3Y-e6-7Ub">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="movieCell" id="2Yd-iH-3aZ" customClass="MovieTableViewCell" customModule="CSRMovies" customModuleProvider="target">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2Yd-iH-3aZ" id="GQ8-xX-msq">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Movie Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RCa-mO-Zzi">
+                                                    <rect key="frame" x="13" y="8" width="489" height="25"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="25" id="cbt-JV-iMK"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Director" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UxJ-HL-lqJ">
+                                                    <rect key="frame" x="13" y="35" width="489" height="17"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="17" id="o8D-tY-obl"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9.9" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I1X-Ng-gSf">
+                                                    <rect key="frame" x="510" y="8" width="49" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="49" id="OKL-dI-GSo"/>
+                                                        <constraint firstAttribute="height" constant="44" id="q18-eR-opW"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="I1X-Ng-gSf" secondAttribute="trailing" constant="8" id="AmP-fe-Q4w"/>
+                                                <constraint firstItem="RCa-mO-Zzi" firstAttribute="top" secondItem="GQ8-xX-msq" secondAttribute="top" constant="8" id="MSS-0N-FaZ"/>
+                                                <constraint firstAttribute="centerY" secondItem="I1X-Ng-gSf" secondAttribute="centerY" constant="-0.5" id="WPZ-td-s74"/>
+                                                <constraint firstItem="UxJ-HL-lqJ" firstAttribute="top" secondItem="RCa-mO-Zzi" secondAttribute="bottom" constant="2" id="g0Q-uQ-E1y"/>
+                                                <constraint firstItem="I1X-Ng-gSf" firstAttribute="leading" secondItem="UxJ-HL-lqJ" secondAttribute="trailing" constant="8" id="g0R-Hy-2zG"/>
+                                                <constraint firstItem="I1X-Ng-gSf" firstAttribute="leading" secondItem="RCa-mO-Zzi" secondAttribute="trailing" constant="8" id="k7Q-zq-Vu0"/>
+                                                <constraint firstItem="UxJ-HL-lqJ" firstAttribute="leading" secondItem="GQ8-xX-msq" secondAttribute="leading" constant="13" id="sN7-hk-lWx"/>
+                                                <constraint firstItem="RCa-mO-Zzi" firstAttribute="leading" secondItem="GQ8-xX-msq" secondAttribute="leading" constant="13" id="yms-tF-WAc"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="directorLabel" destination="UxJ-HL-lqJ" id="pPa-dV-o4j"/>
+                                            <outlet property="movieLabel" destination="RCa-mO-Zzi" id="Y87-oo-Bdm"/>
+                                            <outlet property="ratingLabel" destination="I1X-Ng-gSf" id="nN2-Wz-RYt"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="a3Y-e6-7Ub" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="NCf-4o-Miw"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="a3Y-e6-7Ub" secondAttribute="bottom" id="PhM-aB-Wb7"/>
+                            <constraint firstItem="a3Y-e6-7Ub" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="-20" id="gxY-Ce-25s"/>
+                            <constraint firstAttribute="trailing" secondItem="a3Y-e6-7Ub" secondAttribute="trailing" id="tg5-qq-SDx"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="a3Y-e6-7Ub" id="vh5-4f-j3o"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-83" y="289"/>
         </scene>
     </scenes>
 </document>
