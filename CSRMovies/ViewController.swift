@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -18,6 +18,7 @@ class ViewController: UIViewController, UITableViewDataSource {
         
         super.viewDidLoad()
         
+        tableView.delegate = self
         tableView.dataSource = self
         
         let movie = Movie( title: "Godfather", director: "", rating: "", url: "" )
@@ -89,6 +90,21 @@ class ViewController: UIViewController, UITableViewDataSource {
         return cell
     }
 
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let movie = movies[indexPath.row]
+        performSegueWithIdentifier( "movieSegue", sender: movie )
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "movieSegue" {
+            
+            let movie = sender as Movie
+            let destination = segue.destinationViewController as MoviePageViewController
+            destination.movieURL = movie.url
+        }
+    }
 }
 
 
