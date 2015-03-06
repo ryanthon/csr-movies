@@ -8,10 +8,13 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var searchBar: UISearchBar!
+
+    var tableData: [Movie] = [Movie]()
     var movies: [Movie] = [Movie]()
     
     override func viewDidLoad() {
@@ -20,6 +23,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         tableView.delegate = self
         tableView.dataSource = self
+        searchBar.delegate = self
         
         let movie = Movie( title: "Godfather", director: "", rating: "", url: "" )
         movies.append( movie )
@@ -52,7 +56,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                         movieArray.append( newMovie )
                     }
                     
+                    movieArray.sort(){
+                        $0.title < $1.title
+                    }
+                    
                     self.movies = movieArray
+                    self.tableData = movieArray
                     
                     dispatch_async( dispatch_get_main_queue(), {
                         self.tableView.reloadData()
@@ -60,6 +69,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 }
             }
         }).resume()
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if searchText == "" {
+            tableData = movies
+            tableView.reloadData()
+            return
+        }
+        
+        tableData = filter( movies, {
+            let options = NSStringCompareOptions.AnchoredSearch | NSStringCompareOptions.CaseInsensitiveSearch
+            
+            return $0.title.rangeOfString( searchText, options: options, range: nil, locale: nil ) != nil
+        })
+        
+        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -73,7 +99,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return movies.count
+        return tableData.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -81,7 +107,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let cell = tableView.dequeueReusableCellWithIdentifier( "movieCell" ) as MovieTableViewCell
         
         let index = indexPath.row
-        let movie = movies[index]
+        let movie = tableData[index]
         
         cell.movieLabel.text = movie.title
         cell.directorLabel.text = movie.director
@@ -92,7 +118,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let movie = movies[indexPath.row]
+        let movie = tableData[indexPath.row]
         performSegueWithIdentifier( "movieSegue", sender: movie )
     }
     
